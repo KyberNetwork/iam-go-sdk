@@ -9,9 +9,9 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/anhvietnguyennva/iam-go-sdk/constant"
-	"github.com/anhvietnguyennva/iam-go-sdk/permission/dto"
-	"github.com/anhvietnguyennva/iam-go-sdk/util/env"
+	"github.com/KyberNetwork/iam-go-sdk/constant"
+	"github.com/KyberNetwork/iam-go-sdk/permission/dto"
+	"github.com/KyberNetwork/iam-go-sdk/util/env"
 )
 
 func CheckPermission(namespace string, object string, relation string, subjectID string, maxDepth uint8) (bool, error) {

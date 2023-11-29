@@ -10,10 +10,10 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 
-	"github.com/anhvietnguyennva/iam-go-sdk/cache"
-	"github.com/anhvietnguyennva/iam-go-sdk/constant"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/client"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/entity"
+	"github.com/KyberNetwork/iam-go-sdk/cache"
+	"github.com/KyberNetwork/iam-go-sdk/constant"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/client"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/entity"
 )
 
 func ParseBearer(bearerAuthorization string) (*entity.AccessToken, error) {

@@ -9,10 +9,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/anhvietnguyennva/iam-go-sdk/constant"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/dto"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/entity"
-	"github.com/anhvietnguyennva/iam-go-sdk/util/env"
+	"github.com/KyberNetwork/iam-go-sdk/constant"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/dto"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/entity"
+	"github.com/KyberNetwork/iam-go-sdk/util/env"
 )
 
 func GetJWKs() (map[string]*entity.JWK, error) {

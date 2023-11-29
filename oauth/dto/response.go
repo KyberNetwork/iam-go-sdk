@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/entity"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/entity"
 )
 
 type GetJWKsKeyData struct {

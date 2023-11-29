@@ -1,6 +1,6 @@
 package global
 
-import "github.com/anhvietnguyennva/iam-go-sdk/sdk"
+import "github.com/KyberNetwork/iam-go-sdk/sdk"
 
 var globalSDK sdk.ISDK
 

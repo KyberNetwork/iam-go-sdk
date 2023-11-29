@@ -1,4 +1,4 @@
-module github.com/anhvietnguyennva/iam-go-sdk
+module github.com/KyberNetwork/iam-go-sdk
 
 go 1.21
 

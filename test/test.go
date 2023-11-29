@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	iamsdk "github.com/anhvietnguyennva/iam-go-sdk"
+	iamsdk "github.com/KyberNetwork/iam-go-sdk"
 )
 
 func main() {

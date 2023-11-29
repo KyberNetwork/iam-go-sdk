@@ -3,8 +3,8 @@ package iamsdk
 import (
 	"sync"
 
-	"github.com/anhvietnguyennva/iam-go-sdk/global"
-	"github.com/anhvietnguyennva/iam-go-sdk/sdk"
+	"github.com/KyberNetwork/iam-go-sdk/global"
+	"github.com/KyberNetwork/iam-go-sdk/sdk"
 )
 
 var sdkLock sync.Mutex

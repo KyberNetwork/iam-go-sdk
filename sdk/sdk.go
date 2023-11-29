@@ -3,12 +3,12 @@ package sdk
 import (
 	"fmt"
 
-	"github.com/anhvietnguyennva/iam-go-sdk/constant"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/entity"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/token"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/token/jwt"
-	permissionclient "github.com/anhvietnguyennva/iam-go-sdk/permission/client"
-	"github.com/anhvietnguyennva/iam-go-sdk/permission/dto"
+	"github.com/KyberNetwork/iam-go-sdk/constant"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/entity"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/token"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/token/jwt"
+	permissionclient "github.com/KyberNetwork/iam-go-sdk/permission/client"
+	"github.com/KyberNetwork/iam-go-sdk/permission/dto"
 )
 
 type SDK struct{}

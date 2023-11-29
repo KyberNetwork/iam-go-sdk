@@ -3,9 +3,9 @@ package token
 import (
 	"sync"
 
-	"github.com/anhvietnguyennva/iam-go-sdk/cache"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/client"
-	"github.com/anhvietnguyennva/iam-go-sdk/oauth/entity"
+	"github.com/KyberNetwork/iam-go-sdk/cache"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/client"
+	"github.com/KyberNetwork/iam-go-sdk/oauth/entity"
 )
 
 var lock sync.Mutex
