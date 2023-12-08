@@ -13,6 +13,8 @@ type ISDK interface {
 	GetBearerAccessToken(clientID string, clientSecret string) (string, error)
 
 	CheckPermission(namespace string, object string, relation string, subjectID string) (bool, error)
+	CheckPermissionOneOfObjects(namespace string, objects []string, relation string, subjectID string) (bool, error)
+	CheckPermissionAllOfObjects(namespace string, objects []string, relation string, subjectID string) (bool, error)
 	CheckViewerPermission(namespace string, object string, subjectID string) (bool, error)
 	CheckEditorPermission(namespace string, object string, subjectID string) (bool, error)
 	CheckOwnerPermission(namespace string, object string, subjectID string) (bool, error)

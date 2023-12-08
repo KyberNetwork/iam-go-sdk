@@ -40,6 +40,32 @@ func (s *SDK) CheckPermission(namespace string, object string, relation string, 
 	return permissionclient.CheckPermission(namespace, object, relation, subjectID, constant.IAMPermissionCheckPermissionMaxDepthDefault)
 }
 
+func (s *SDK) CheckPermissionOneOfObjects(namespace string, objects []string, relation string, subjectID string) (bool, error) {
+	for _, object := range objects {
+		allowed, err := permissionclient.CheckPermission(namespace, object, relation, subjectID, constant.IAMPermissionCheckPermissionMaxDepthDefault)
+		if err != nil {
+			return false, err
+		}
+		if allowed {
+			return true, nil
+		}
+	}
+	return false, nil
+}
+
+func (s *SDK) CheckPermissionAllOfObjects(namespace string, objects []string, relation string, subjectID string) (bool, error) {
+	for _, object := range objects {
+		allowed, err := permissionclient.CheckPermission(namespace, object, relation, subjectID, constant.IAMPermissionCheckPermissionMaxDepthDefault)
+		if err != nil {
+			return false, err
+		}
+		if !allowed {
+			return false, nil
+		}
+	}
+	return true, nil
+}
+
 func (s *SDK) CheckViewerPermission(namespace string, object string, subjectID string) (bool, error) {
 	return permissionclient.CheckPermission(namespace, object, constant.IAMPermissionRelationViewer, subjectID, constant.IAMPermissionCheckPermissionMaxDepthDefault)
 }
