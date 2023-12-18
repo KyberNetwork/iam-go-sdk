@@ -80,3 +80,40 @@ func CreatePermission(request *dto.CreatePermissionRequest, bearerAccessToken st
 
 	return responseBody.Data.ID, nil
 }
+
+func CreatePermissionMultipleObjects(request *dto.CreatePermissionMultipleObjectsRequest, bearerAccessToken string) ([]string, error) {
+	endpoint := env.StringFromEnv(
+		constant.EnvKeyPermissionCreateSubjectRelationTupleMultipleObjectsURL,
+		constant.IAMPermissionCreateSubjectRelationTupleMultipleObjectsDefaultURL,
+	)
+	marshalledReq, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequest(http.MethodPost, endpoint, bytes.NewReader(marshalledReq))
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", bearerAccessToken)
+	client := http.Client{}
+
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	bodyJson, err := io.ReadAll(res.Body)
+	if err != nil {
+		return nil, fmt.Errorf("encountered error when calling %s: %v", endpoint, err)
+	}
+	if res.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("encountered error when calling %s, status code: %d, response: %s", endpoint, res.StatusCode, bodyJson)
+	}
+	var responseBody dto.CreatePermissionMultipleObjectsResponse
+	err = json.Unmarshal(bodyJson, &responseBody)
+	if err != nil {
+		return nil, fmt.Errorf("encountered error when attempting unmarshal response from %s: %v", endpoint, err)
+	}
+
+	return responseBody.Data.IDs, nil
+}

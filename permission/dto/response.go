@@ -19,3 +19,13 @@ type CreatePermissionResponse struct {
 	Message string                  `json:"message"`
 	Data    CreatePermissionResData `json:"data"`
 }
+
+type CreatePermissionMultipleObjectsResData struct {
+	IDs []string `json:"ids"`
+}
+
+type CreatePermissionMultipleObjectsResponse struct {
+	Code    int64                                  `json:"code"`
+	Message string                                 `json:"message"`
+	Data    CreatePermissionMultipleObjectsResData `json:"data"`
+}

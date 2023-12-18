@@ -124,3 +124,47 @@ func (s *SDK) CreateConsumerPermission(namespace string, object string, subjectI
 	}
 	return permissionclient.CreatePermission(&request, bearerAccessToken)
 }
+
+func (s *SDK) CreatePermissionMultipleObjects(request *dto.CreatePermissionMultipleObjectsRequest, bearerAccessToken string) ([]string, error) {
+	return permissionclient.CreatePermissionMultipleObjects(request, bearerAccessToken)
+}
+
+func (s *SDK) CreateViewerPermissionMultipleObjects(namespace string, objects []string, subjectID string, bearerAccessToken string) ([]string, error) {
+	request := dto.CreatePermissionMultipleObjectsRequest{
+		Namespace: namespace,
+		Objects:   objects,
+		Relation:  constant.IAMPermissionRelationViewer,
+		SubjectID: subjectID,
+	}
+	return permissionclient.CreatePermissionMultipleObjects(&request, bearerAccessToken)
+}
+
+func (s *SDK) CreateEditorPermissionMultipleObjects(namespace string, objects []string, subjectID string, bearerAccessToken string) ([]string, error) {
+	request := dto.CreatePermissionMultipleObjectsRequest{
+		Namespace: namespace,
+		Objects:   objects,
+		Relation:  constant.IAMPermissionRelationEditor,
+		SubjectID: subjectID,
+	}
+	return permissionclient.CreatePermissionMultipleObjects(&request, bearerAccessToken)
+}
+
+func (s *SDK) CreateOwnerPermissionMultipleObjects(namespace string, objects []string, subjectID string, bearerAccessToken string) ([]string, error) {
+	request := dto.CreatePermissionMultipleObjectsRequest{
+		Namespace: namespace,
+		Objects:   objects,
+		Relation:  constant.IAMPermissionRelationOwner,
+		SubjectID: subjectID,
+	}
+	return permissionclient.CreatePermissionMultipleObjects(&request, bearerAccessToken)
+}
+
+func (s *SDK) CreateConsumerPermissionMultipleObjects(namespace string, objects []string, subjectID string, bearerAccessToken string) ([]string, error) {
+	request := dto.CreatePermissionMultipleObjectsRequest{
+		Namespace: namespace,
+		Objects:   objects,
+		Relation:  constant.IAMPermissionRelationConsumer,
+		SubjectID: subjectID,
+	}
+	return permissionclient.CreatePermissionMultipleObjects(&request, bearerAccessToken)
+}

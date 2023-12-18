@@ -6,3 +6,10 @@ type CreatePermissionRequest struct {
 	Relation  string `json:"relation"`
 	SubjectID string `json:"subjectId"`
 }
+
+type CreatePermissionMultipleObjectsRequest struct {
+	Namespace string   `json:"namespace"`
+	Objects   []string `json:"objects"`
+	Relation  string   `json:"relation"`
+	SubjectID string   `json:"subjectId"`
+}
