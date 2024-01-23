@@ -1,7 +1,13 @@
 package sdk
 
 import (
+	"context"
 	"fmt"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 
 	"github.com/KyberNetwork/iam-go-sdk/constant"
 	"github.com/KyberNetwork/iam-go-sdk/oauth/entity"
@@ -15,6 +21,34 @@ type SDK struct{}
 
 func New() *SDK {
 	return &SDK{}
+}
+
+func (s *SDK) GRPCInterceptor() func(ctx context.Context, req interface{}, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+	return func(ctx context.Context, req interface{}, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+		// extract bearer access token from context
+		md, ok := metadata.FromIncomingContext(ctx)
+		if !ok {
+			return nil, status.Errorf(codes.DataLoss, "failed to get metadata")
+		}
+		bearerAccessToken, ok := md[constant.MetadataAuthorizationKey]
+		if !ok || len(bearerAccessToken) == 0 {
+			return nil, status.Errorf(codes.Unauthenticated, "missing access token")
+		}
+
+		// parse bearer access token
+		tokenEntity, err := s.ParseBearerJWT(bearerAccessToken[0])
+		if err != nil {
+			return nil, status.Errorf(codes.Unauthenticated, err.Error())
+		}
+
+		// set token entity into context
+		authenticatedCtx := context.WithValue(ctx, constant.CtxAccessTokenKey, tokenEntity)
+
+		// Call the handler to execute the server method
+		resp, err := handler(authenticatedCtx, req)
+
+		return resp, err
+	}
 }
 
 func (s *SDK) ParseBearerJWT(bearerTokenJWTString string) (*entity.AccessToken, error) {
