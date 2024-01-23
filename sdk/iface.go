@@ -1,11 +1,19 @@
 package sdk
 
 import (
+	"context"
+
+	"google.golang.org/grpc"
+
 	"github.com/KyberNetwork/iam-go-sdk/oauth/entity"
 	"github.com/KyberNetwork/iam-go-sdk/permission/dto"
 )
 
+//go:generate mockgen -destination=sdk_mock.go -package sdk . ISDK
 type ISDK interface {
+	// GRPCInterceptor return a function which extracts bearer access token from metadata, parse the access token and set *entity.AccessToken into ctx
+	GRPCInterceptor() func(ctx context.Context, req interface{}, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error)
+
 	ParseBearerJWT(bearerTokenJWTString string) (*entity.AccessToken, error)
 	ParseJWT(tokenJWTString string) (*entity.AccessToken, error)
 
