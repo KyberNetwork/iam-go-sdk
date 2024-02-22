@@ -2,7 +2,7 @@ package cache
 
 import "sync"
 
-var lock sync.Mutex
+var lock sync.RWMutex
 var cacheMap map[string]any
 
 func Set(key string, value any) {
@@ -12,8 +12,8 @@ func Set(key string, value any) {
 }
 
 func Get[T any](key string) (T, error) {
-	lock.Lock()
-	defer lock.Unlock()
+	lock.RLock()
+	defer lock.RUnlock()
 
 	var nilResult T
 
