@@ -23,6 +23,12 @@ func New() *SDK {
 	return &SDK{}
 }
 
+type contextKey string
+
+const (
+	CtxAccessTokenKey = contextKey(constant.CtxAccessTokenKey)
+)
+
 func (s *SDK) GRPCInterceptor() func(ctx context.Context, req interface{}, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 	return func(ctx context.Context, req interface{}, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		// extract bearer access token from context
@@ -42,7 +48,7 @@ func (s *SDK) GRPCInterceptor() func(ctx context.Context, req interface{}, _ *gr
 		}
 
 		// set token entity into context
-		authenticatedCtx := context.WithValue(ctx, constant.CtxAccessTokenKey, tokenEntity)
+		authenticatedCtx := context.WithValue(ctx, CtxAccessTokenKey, tokenEntity)
 
 		// Call the handler to execute the server method
 		resp, err := handler(authenticatedCtx, req)
